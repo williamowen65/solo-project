@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const { handleErrors } = require('./util/helper-functions')
+const { handleErrors, dbConnect } = require('./util/helper-functions')
 
 const PORT = process.env.PORT || 3000
 
@@ -20,6 +20,10 @@ app.use((err, req, res, next) => {
     console.log('global err: ', err.message);
 })
 
-app.listen(PORT, () => {
-    console.log(`listening on port ${PORT}`)
+dbConnect().then(() => {
+    console.log('db connected');
+    app.listen(PORT, () => {
+        console.log(`listening on port ${PORT}`)
+    })
 })
+

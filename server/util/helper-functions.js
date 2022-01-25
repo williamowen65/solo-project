@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+require('dotenv').config()
+
 const handleErrors = (err) => {
     // console.log(err.message, err.code);
     let error = { email: '', password: '' }
@@ -21,6 +24,21 @@ const handleErrors = (err) => {
     return error
 }
 
+
+
+
+const dbURI = process.env.LOCAL_CONNECTION;
+
+console.log('DBURI: ', dbURI);
+
+async function dbConnect() {
+    return mongoose.connect(dbURI, { 
+        useNewUrlParser: true, 
+        useUnifiedTopology: true
+    })
+}
+
 module.exports = {
-    handleErrors
+    handleErrors,
+    dbConnect
 }
