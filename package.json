@@ -5,7 +5,9 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "dev": "set NODE_ENV=development && webpack serve",
+    "client": "set NODE_ENV=development && webpack serve",
+    "server": "cd server && npm run startDev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "build": "set NODE_ENV=production && webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "random": "set NODE_ENV=production && nodemon not-important.js"
