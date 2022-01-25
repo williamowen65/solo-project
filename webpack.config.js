@@ -8,6 +8,10 @@ module.exports = {
     output: {
         path: path.resolve('./client/dist')
     },
+    devtool: 'inline-source-map',
+    devServer: {
+        historyApiFallback: true
+    },
     module: {
         rules: [
             {
