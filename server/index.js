@@ -19,7 +19,8 @@ app.use((req, res) => {
 })
 
 app.use((err, req, res, next) => {
-    console.log('global err: ', err.message);
+    console.log('global err: ', handleErrors(err));
+    res.status(502).json(handleErrors(err))
 })
 
 dbConnect().then(() => {
