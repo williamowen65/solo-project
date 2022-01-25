@@ -4,11 +4,21 @@ GET http://localhost:3000
 GET http://localhost:3000/help
 
 ###
-POST http://localhost:3000/user
+POST http://localhost:3000/user/signup
 Content-Type: application/json
 
 {
     "username": "William",
-    "password": "123124",
-    "email": "william@gmail.com"
+    "password": "sdasds",
+    "email": "wildliadm@gmail.com"
+}
+
+###
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+    "username": "William",
+    "password": "sdasds",
+    "email": "wildliam@gmail.com"
 }
