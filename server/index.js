@@ -11,6 +11,8 @@ app.use(['/', '/help'], require('./routes/welcome'))
 
 app.use('/games', require('./routes/games'))
 
+app.use('/user', require('./routes/auth'))
+
 
 app.use((req, res) => {
     res.send('that route does not exist')
@@ -25,5 +27,7 @@ dbConnect().then(() => {
     app.listen(PORT, () => {
         console.log(`listening on port ${PORT}`)
     })
+}).catch(err =>{
+    console.log('Database connection issue');
 })
 

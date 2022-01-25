@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const bcrypt = require('bcrypt')
+
 const userSchema = new Schema({
     username: {
         type: String,
@@ -17,6 +19,14 @@ const userSchema = new Schema({
     userGames: {
         type: Array,
         default: Object
+    }
+})
+
+userSchema.pre('save', async function (next) {
+    try {
+        this.password = await bcrypt.hash(this.password, 10)
+    } catch (error) {
+        next('pre-save processing failed in userModel')
     }
 })
 

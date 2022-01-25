@@ -1,13 +1,14 @@
 const express = require('express');
+const usersMW = require('../middleware/users')
 
 const router = express.Router();
 
-router.post('/user', (req, res) => {
-    res.send(`sign up`)
+router.post('/', usersMW.signup, (req, res) => {
+    res.status(201).json(res.locals.user)
 })
 
 
-router.patch('/user', (req, res) => {
+router.patch('/', (req, res) => {
     res.send(`update user info`)
 })
 

@@ -2,3 +2,13 @@ GET http://localhost:3000
 
 ###
 GET http://localhost:3000/help
+
+###
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+    "username": "William",
+    "password": "123124",
+    "email": "william@gmail.com"
+}
