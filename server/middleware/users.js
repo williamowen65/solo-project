@@ -86,8 +86,13 @@ usersMW.createSession = async (req, res, next) => {
     }
 }
 
-usersMW.updateAccount = (req, res, next) => {
-
+usersMW.updateAccount = async (req, res, next) => {
+    try {
+        await userModel.findOneAndUpdate({email: req.body.email}, {$set: {username: req.body.username}})
+        next()
+    } catch (error) {
+        next(error)
+    }
 }
 
 usersMW.authorize = async (req, res, next) => {

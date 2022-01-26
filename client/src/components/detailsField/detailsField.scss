@@ -1,0 +1,12 @@
+label {
+    display: flex;
+    // flex-direction: column;
+    input {
+        margin: 0 10px;
+    }
+    span {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

@@ -65,3 +65,17 @@ export function logout() {
         console.log(err);
     })
 }
+
+export function update(field) {
+        const obj = {
+            email: email,
+            field
+        }
+        fetch(proxy('/user'), {
+            method: 'PATCH',
+            body: JSON.stringify(field),
+            headers: {'Content-Type': 'application/json'}
+        }).then(res => res.json())
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }

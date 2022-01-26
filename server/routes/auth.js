@@ -18,17 +18,21 @@ router.post('/login', usersMW.login, usersMW.cred, usersMW.createSession, (req, 
     // res.cookie('accessToken', res.locals.cred.accessToken, {sameSite: 'lax'})
     // res.cookie('refreshToken', res.locals.cred.refreshToken, {sameSite: 'lax'})
     res.status(202).json({
-        username: res.locals.user.username,
+        user: {
+            username: res.locals.user.username,
+            email: res.locals.user.email
+        },
         cred: res.locals.cred
     })
 })
 
 
-router.patch('/', (req, res) => {
-    res.send(`update user info`)
+router.patch('/', usersMW.updateAccount, (req, res) => {
+    res.json({pinged: `update user info`})
 })
 
 router.get('/auth', usersMW.authorize, usersMW.cred, usersMW.createSession, (req, res) => {
+    console.log(res.locals);
     res.json({
         username: res.locals.user,
         cred: res.locals.cred

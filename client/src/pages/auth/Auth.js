@@ -42,7 +42,7 @@ export default function Auth({sourceFunctions}) {
             console.log(res);
             if(res.cred){
                 storeCred(res.cred)
-                sourceFunctions.setUser(res.username)
+                sourceFunctions.setUser(res.user)
                 navigate('/')
             } else {
                 setError(res)

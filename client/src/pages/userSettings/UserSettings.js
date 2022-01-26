@@ -1,11 +1,18 @@
 import React from 'react'
+import { DetailsField } from '../../components/detailsField/DetailsField'
 
-export function UserSettings(props) {
+export function UserSettings({state, sourceFunctions }) {
     
-
-    return (
-        <>
-            USERSetting
-        </>
-    )
+    if(state) {
+        const {
+            username
+        } = state
+        return (
+            <>
+                <h1>User Settings</h1>
+                <DetailsField name={'username'} value={username} sourceFunctions={sourceFunctions} />
+            </>
+        )
+    }
+    return null
 }
