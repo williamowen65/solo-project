@@ -1,0 +1,34 @@
+header.your-games{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+table{
+    width: 70vw;
+    margin: 30px auto 0;
+    thead{
+        background-color: aquamarine;
+        td{
+            border: 1px solid black;
+
+        }
+    }
+    tbody{
+        tr.edit {
+            td{
+                &#edit{
+                    width: 5px;
+                }
+                &:hover{
+                    cursor: pointer;
+                    background-color:beige;
+                }
+            }
+        }
+    }
+}

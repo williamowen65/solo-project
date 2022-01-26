@@ -16,6 +16,7 @@ import { isAuthorized, logout, update } from './utils/helper-functions'
 import { UserSettings } from './pages/userSettings/UserSettings';
 import { GameConfig } from './pages/gameConfig/GameConfig';
 import { Game } from './pages/game/Game';
+import { CustomizeGame } from './pages/customizeGame/CustomizeGame';
 
 
 function App() {
@@ -70,7 +71,8 @@ function App() {
             <Route path='/login' element={<Auth sourceFunctions={sourceFunctions}/>} />
             <Route path='/signup' element={<Auth sourceFunctions={sourceFunctions} />} />
             <Route path="/account" element={<UserSettings state={state} sourceFunctions={sourceFunctions} />} />
-            <Route path="/game-config/:step" element={<GameConfig />} />
+            {state && state.auth && <Route path="/game-config/:step" element={<GameConfig />} />}
+            <Route path="/user/games" element={<CustomizeGame/>}/>
             <Route path='/game/:id' element={<Game />}/>
             <Route path="*" element={<NotFoundPage/>} />
           </Routes>

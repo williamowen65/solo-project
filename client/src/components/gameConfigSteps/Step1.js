@@ -36,7 +36,7 @@ export function Step1() {
                 
                 <div>
                     <h2>Or define your own rules</h2>
-                    <button>Try it out</button>
+                    <button onClick={() => navigate('/user/games')}>Try it out</button>
                 </div>
             </div>
         </>

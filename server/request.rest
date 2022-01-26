@@ -22,3 +22,14 @@ Content-Type: application/json
     "password": "sdasds",
     "email": "wildliam@gmail.com"
 }
+
+###
+GET http://localhost:3000/games
+
+###
+POST http://localhost:3000/games/create
+Content-Type: application/json
+
+{
+    "title": "testsss"
+}

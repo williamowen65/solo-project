@@ -26,6 +26,9 @@ const handleErrors = (err) => {
             case 3:
                 error.password = 'Not authenticated'
                 break;
+            case 4:
+                error = {error: 'A game by that title already exist'}
+                break;
             default:
                 error = { error: "unknown"}
                 break;
@@ -53,7 +56,8 @@ console.log('DBURI: ', dbURI);
 async function dbConnect() {
     return mongoose.connect(dbURI, { 
         useNewUrlParser: true, 
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        autoIndex: true
     })
 }
 

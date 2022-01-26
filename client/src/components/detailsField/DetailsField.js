@@ -16,13 +16,17 @@ export function DetailsField({name, value, sourceFunctions: { handleUpdateUser }
         // console.log(e.target.value);
         value = e.target.value
     }
+
+    // const handleEnter = (e) => {
+    //     console.log(e.target);
+    // }
    
     return (
         <>
     <label>
         {name}
         {isEditing ? 
-            <input type="text" placeholder={value} onChange={controlValue} /> :
+            <input type="text" placeholder={value} onChange={controlValue}  /> :
             <input type="text" value={value} disabled/> 
         }
         {isEditing ?
