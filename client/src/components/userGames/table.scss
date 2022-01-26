@@ -1,0 +1,36 @@
+table{
+    width: 70vw;
+    margin: 30px auto 0;
+    thead{
+        background-color: aquamarine;
+        td{
+            border: 1px solid black;
+
+        }
+    }
+    td#edit {
+        width: 5px;
+    }
+    tr{
+        &:first-child{
+            margin-right: 30px;
+        }
+    }
+    tbody{
+        tr{
+            cursor: pointer;
+        }
+        tr.edit {
+            td{
+                
+                &:hover{
+                    cursor: pointer;
+                    background-color:beige;
+                }
+            }
+        }
+    }
+    input[type=checkbox]{
+        cursor: pointer;
+    }
+}

@@ -70,9 +70,9 @@ function App() {
             <Route path='/' element={<Welcome state={state} sourceFunctions={sourceFunctions}/>}/>
             <Route path='/login' element={<Auth sourceFunctions={sourceFunctions}/>} />
             <Route path='/signup' element={<Auth sourceFunctions={sourceFunctions} />} />
-            <Route path="/account" element={<UserSettings state={state} sourceFunctions={sourceFunctions} />} />
+            {state && state.auth && <Route path="/account" element={<UserSettings state={state} sourceFunctions={sourceFunctions} />} />}
             {state && state.auth && <Route path="/game-config/:step" element={<GameConfig />} />}
-            <Route path="/user/games" element={<CustomizeGame/>}/>
+            {state && state.auth && <Route path="/user/games" element={<CustomizeGame/>}/>}
             <Route path='/game/:id' element={<Game />}/>
             <Route path="*" element={<NotFoundPage/>} />
           </Routes>
