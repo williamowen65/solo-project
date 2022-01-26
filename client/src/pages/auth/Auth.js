@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { 
@@ -11,9 +11,11 @@ export default function Auth({sourceFunctions}) {
     const navigate = useNavigate()
     const path = location.pathname
     const [error, setError] = useState()
+    const start = useRef()
 
-
-  
+    useEffect(() => {
+        start.current.focus()
+    }, [path])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -50,20 +52,32 @@ export default function Auth({sourceFunctions}) {
         })
       
     }
+    
 
     return (
         <form onSubmit={handleSubmit}>
             {path === '/signup'? 
                 <h1>Signup</h1> : <h1>Login</h1>
             }
-            {path === '/signup' && <label htmlFor="username">Username
-                <input type="text" name="username" id="username" placeholder='You can change this later' />
-                <p className='error'>{error && error.username ? error.username : null}</p>
-            </label>}
-            <label htmlFor="email">Email
-                <input type="email" name="email" id="email" />
-                <p className='error'>{error && error.email ? error.email : null}</p>
-            </label>
+            {path === '/signup' && (
+                <>
+                <label htmlFor="username">Username
+                    <input ref={start} type="text" name="username" id="username" placeholder='You can change this later' />
+                    <p className='error'>{error && error.username ? error.username : null}</p>
+                </label>
+                <label htmlFor="email">Email
+                    <input type="email" name="email" id="email" />
+                    <p className='error'>{error && error.email ? error.email : null}</p>
+                </label>
+                </>
+            )}
+            {path === '/login' && (
+
+                <label htmlFor="email">Email
+                    <input ref={start} type="email" name="email" id="email" />
+                    <p className='error'>{error && error.email ? error.email : null}</p>
+                </label>
+            )}
             <label htmlFor="password">Password
                 <input type="password" name="password" id="password" />
                 <p className='error'>{error && error.password ? error.password : null}</p>

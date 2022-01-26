@@ -9,7 +9,7 @@ export function storeCred(cred) {
 }
 
 export function isAuthorized(app) {
-    console.log(app);
+    // console.log(app);
     let auth = false
     const cred = {
         accessToken: localStorage.getItem('accessToken'),

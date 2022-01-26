@@ -8,6 +8,8 @@ function Welcome({state, sourceFunctions: {handleLogout}}) {
     return (
         <>
             <h1>Round Table Games</h1>
+            <nav>
+
             {state && <p>Hello {state.username}</p>}
             {!state && (
                 <>
@@ -15,7 +17,14 @@ function Welcome({state, sourceFunctions: {handleLogout}}) {
                     <Link to="/signup">Signup</Link>
                 </>
             )}
-            {state && <span onClick={handleLogout}>Logout</span>}
+            {state && (
+                <>
+                    <span onClick={handleLogout}>Logout</span>
+                    <Link to='/account'>User Settings</Link>
+                    <Link to='/create'>Create Game</Link>
+                </>
+                )}
+            </nav>
         </>
     )
 }
