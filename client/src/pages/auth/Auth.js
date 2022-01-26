@@ -1,13 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import { proxy } from '../../utils/helper-functions'
+import { 
+    proxy, 
+    storeCred
+} from '../../utils/helper-functions'
 
-export default function Auth(props) {
+export default function Auth({sourceFunctions}) {
     const location = useLocation()
     const navigate = useNavigate()
     const path = location.pathname
     const [error, setError] = useState()
+
+
+  
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -32,8 +38,10 @@ export default function Auth(props) {
         }).then(res => res.json())
         .then(res => {
             console.log(res);
-            if(res.accessToken){
-
+            if(res.cred){
+                storeCred(res.cred)
+                sourceFunctions.setUser(res.username)
+                navigate('/')
             } else {
                 setError(res)
             }

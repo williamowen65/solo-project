@@ -60,9 +60,11 @@ async function dbConnect() {
 
 
 function generateAccessToken(user) {
+    console.log('genAccess: ', user);
     return jwt.sign({username: user}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h'})
 }
 function generateRefreshToken(user) {
+    console.log('genRefresh: ', user);
     return jwt.sign({username: user}, process.env.REFRESH_TOKEN_SECRET)
 }
 
