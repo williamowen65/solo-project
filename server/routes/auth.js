@@ -29,11 +29,15 @@ router.patch('/', (req, res) => {
 })
 
 router.get('/auth', usersMW.authorize, usersMW.cred, usersMW.createSession, (req, res) => {
-    console.log('ened');
     res.json({
         username: res.locals.user,
         cred: res.locals.cred
     })
+})
+
+router.delete('/logout', usersMW.logout, (req, res) => {
+    console.log('hey');
+    res.status(200).json({status: 'success'})
 })
 
 

@@ -4,14 +4,15 @@ import './styles/core.scss'
 import {
     BrowserRouter as Router,
     Routes,
-    Route
+    Route,
+    useNavigate
 } from 'react-router-dom'
 
 import Welcome from './pages/welcome/Welcome.js'
 import NotFoundPage from './pages/404/NotFoundPage.js'
 import Auth from './pages/auth/Auth.js'
 
-import { isAuthorized } from './utils/helper-functions'
+import { isAuthorized, logout } from './utils/helper-functions'
 
 function App() {
 
@@ -28,19 +29,21 @@ function App() {
         user.username = name
         user.auth = true
         setState(user)
+      },
+      handleLogout: () => {
+        logout()
+        setState(null)
       }
     }
 
     useEffect(() => {
-      if(isAuthorized()){
-          alert('authorized')
-      }
+      isAuthorized(setState)
     }, [])
 
     return (
         <Router>
           <Routes>
-            <Route path='/' element={<Welcome/>}/>
+            <Route path='/' element={<Welcome state={state} sourceFunctions={sourceFunctions}/>}/>
             <Route path='/login' element={<Auth sourceFunctions={sourceFunctions}/>} />
             <Route path='/signup' element={<Auth sourceFunctions={sourceFunctions} />} />
             {/* <Route path='/game/:id' element={<Game />}/> */}

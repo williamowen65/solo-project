@@ -8,7 +8,9 @@ export function storeCred(cred) {
     localStorage.setItem('refreshToken', cred.refreshToken)
 }
 
-export function isAuthorized() {
+export function isAuthorized(app) {
+    console.log(app);
+    let auth = false
     const cred = {
         accessToken: localStorage.getItem('accessToken'),
         refreshToken: localStorage.getItem('refreshToken')
@@ -26,14 +28,40 @@ export function isAuthorized() {
     })
     .then(res => res.json())
     .then(res => {
-        console.log('res: ', res);
+        console.log('res auth: ', res);
         if(res.cred){
             storeCred(res.cred)
         }
+        /*
+        There is an error with this. not dry... two place in code where you can set
+        username, auth, userGames: []
+        */
+        app(res)
         return res
     }).catch(err => {
         console.log(err);
     })
+    return auth
+}
 
-    // return true
+export function logout() {
+    const obj = {
+        jwt: localStorage.getItem('refreshSession')
+    }
+
+    fetch(proxy('/user/logout'), {
+        method: 'DELETE',
+        body: JSON.stringify(obj),
+        headers: {'Content-Type': 'application/json'}
+    }).then(res => {
+        console.log(res);
+        return res.json()
+    })
+    .then(res => {
+        console.log(res);
+        localStorage.removeItem('accessToken')
+        localStorage.removeItem('refreshToken')
+    }).catch(err => {
+        console.log(err);
+    })
 }

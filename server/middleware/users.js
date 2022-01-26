@@ -33,8 +33,13 @@ usersMW.login = async (req, res, next) => {
     }
 }
 
-usersMW.logout = (req, res, next) => {
-
+usersMW.logout = async (req, res, next) => {
+    try {
+        await sessionModel.deleteOne({jwt: req.body.jwt})
+        next()
+    } catch (error) {
+        next(error)
+    }
 }
 
 usersMW.cred = (req, res, next) => {
@@ -118,8 +123,7 @@ usersMW.authorize = async (req, res, next) => {
             next('some error in authorize')
         }
     }
-    
-    
 }
+
 
 module.exports = usersMW
