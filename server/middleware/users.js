@@ -45,11 +45,11 @@ usersMW.logout = async (req, res, next) => {
 
 usersMW.cred = (req, res, next) => {
     const user = res.locals.newUser || res.locals.user
-    console.log('user: ', user);
+    console.log('user: ', user, user.id, user._id);
     if(user){
         res.locals.cred = {
-            accessToken: generateAccessToken(user.username),
-            refreshToken: generateRefreshToken(user.username),
+            accessToken: generateAccessToken(user.id),
+            refreshToken: generateRefreshToken(user.id),
         }
         // console.log('cred: ', res.locals.cred);
         next()
@@ -87,8 +87,15 @@ usersMW.createSession = async (req, res, next) => {
 }
 
 usersMW.updateAccount = async (req, res, next) => {
+    console.log('body: ', req.body);
+    const update = {}
+    update[req.body.field.name] = req.body.field.value
+    console.log(update);
     try {
-        await userModel.findOneAndUpdate({email: req.body.email}, {$set: {username: req.body.username}})
+
+        // const user = await userModel.findOne({email: req.body.email})
+        const user = await userModel.findOneAndUpdate({email: req.body.email}, update, {new: true})
+        console.log('this: ', user);
         next()
     } catch (error) {
         next(error)
@@ -102,11 +109,17 @@ usersMW.authorize = async (req, res, next) => {
     try {
         if(await jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET)){
 
-            const user = jwt.decode(accessToken, process.env.ACCESS_TOKEN_SECRET)
+            const tokenBody = jwt.decode(accessToken, process.env.ACCESS_TOKEN_SECRET)
+            console.log(tokenBody);
+            const user = await userModel.findOne({_id: tokenBody._id})
             console.log(user);
             res.json({
                 auth: true,
-                username: user.username
+                user: {
+                    username: user.username,
+                    email: user.email,
+                    userGames: user.userGames,
+                }
             })
         }
         

@@ -10,7 +10,7 @@ function Welcome({state, sourceFunctions: {handleLogout}}) {
             <h1>Round Table Games</h1>
             <nav>
 
-            {state && <p>Hello {state.username}</p>}
+            {state && <p>Hello {state.user.username}</p>}
             {!state && (
                 <>
                     <Link to="/login">Login</Link>

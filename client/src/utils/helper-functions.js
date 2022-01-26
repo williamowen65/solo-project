@@ -66,14 +66,15 @@ export function logout() {
     })
 }
 
-export function update(field) {
+export function update(field, email) {
         const obj = {
             email: email,
             field
         }
+        console.log('obj: ', obj);
         fetch(proxy('/user'), {
             method: 'PATCH',
-            body: JSON.stringify(field),
+            body: JSON.stringify(obj),
             headers: {'Content-Type': 'application/json'}
         }).then(res => res.json())
         .then(res => console.log(res))

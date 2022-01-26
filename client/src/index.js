@@ -20,7 +20,7 @@ function App() {
 
     const [state, setState] = useState(null)
 
-    const user = {
+    const userTemplate = {
       username: undefined,
       userGames: [],
       email: undefined,
@@ -29,10 +29,10 @@ function App() {
 
     const sourceFunctions = {
       setUser: (thisUser) => {
-        user.username = thisUser.username
-        user.email = thisUser.email
-        user.auth = true
-        setState(user)
+        userTemplate.username = thisUser.username
+        userTemplate.email = thisUser.email
+        userTemplate.auth = true
+        setState(userTemplate)
       },
       handleLogout: () => {
         logout()
@@ -40,8 +40,18 @@ function App() {
       },
       handleUpdateUser: (field) => {
         // console.log(field);
-        update(field)
-        // setState
+        // console.log(state);
+        const updates = {}
+        updates[field.name] = field.value
+        update(field, state.user.email)
+        setState({
+          ...state,
+          user: {
+            ...state.user,
+            ...updates
+          }
+        })
+        console.log(state);
       }
     }
 
