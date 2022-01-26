@@ -1,3 +1,10 @@
+@import '../pages/auth/auth.scss';
+
+
 body {
     color: blue;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
 }

@@ -1,0 +1,21 @@
+form {
+    border: 1px solid black;
+    padding: 30px 50px;
+    margin-top: 20vh;
+    h1 {
+        margin-top: 0; 
+    }
+    label {
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+        input{
+            line-height: 25px;
+            padding: 0 7px;
+        }
+    }
+    button {
+        display: inline-block;
+        margin: 0 auto;
+    }
+}

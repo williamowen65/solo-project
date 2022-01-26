@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 function Welcome(props) {
 
@@ -7,8 +7,9 @@ function Welcome(props) {
 
     return (
         <>
-            <div>WELCOME</div>
-            <button onClick={() => navigate('/hi')}>Hi</button>
+            <h1>Round Table Games</h1>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Signup</Link>
         </>
     )
 }

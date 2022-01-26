@@ -9,6 +9,7 @@ import {
 
 import Welcome from './pages/welcome/Welcome.js'
 import NotFoundPage from './pages/404/NotFoundPage.js'
+import Auth from './pages/auth/Auth.js'
 
 function App() {
 
@@ -17,6 +18,8 @@ function App() {
         <Router>
           <Routes>
             <Route path='/' element={<Welcome/>}/>
+            <Route path='/login' element={<Auth/>} />
+            <Route path='/signup' element={<Auth/>} />
             {/* <Route path='/game/:id' element={<Game />}/> */}
             <Route path="*" element={<NotFoundPage/>} />
           </Routes>
