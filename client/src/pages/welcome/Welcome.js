@@ -21,7 +21,7 @@ function Welcome({state, sourceFunctions: {handleLogout}}) {
                 <>
                     <span onClick={handleLogout}>Logout</span>
                     <Link to='/account'>User Settings</Link>
-                    <Link to='/create'>Create Game</Link>
+                    <Link to='/game-config'>Create Game</Link>
                 </>
                 )}
             </nav>

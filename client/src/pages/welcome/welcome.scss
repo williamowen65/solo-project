@@ -1,4 +1,13 @@
 nav {
+    display: flex;
+    flex-direction: column;
+    a{
+        color:inherit;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
     span {
         cursor: pointer;
         &:hover{
