@@ -16,6 +16,26 @@ form {
     }
     button {
         display: inline-block;
-        margin: 0 auto;
+    }
+    .error {
+        margin: 0px;
+        color: red;
+    }
+    .btns {
+        display: flex;
+        justify-content: space-between;
+        .btn {
+            cursor: pointer;
+            border: 1px solid grey;
+            padding: 2px 5px;
+            border-radius: 3px;
+            background-color: lightblue;
+            color: inherit;
+            font-family: inherit;
+            font-size: inherit;
+            &:hover {
+                background-color: rgb(91, 182, 212);
+            }
+        }
     }
 }

@@ -11,13 +11,20 @@ const usersMW = {}
 
 usersMW.login = async (req, res, next) => {
     try {
+        if(req.body.email.trim().length === 0) {
+            next({code: 2})
+        }
         const user = await userModel.findOne({email: req.body.email})
-        const auth = await bcrypt.compare(req.body.password, user.password)
-        if(auth) {
-            res.locals.user = user
-            next()
+        if(user){
+            const auth = await bcrypt.compare(req.body.password, user.password)
+            if(auth) {
+                res.locals.user = user
+                next()
+            } else {
+                next({code: 3})
+            }
         } else {
-            next('Not authenticated')
+            next({code: 1})
         }
     } catch (error) {
         next(error)

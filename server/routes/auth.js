@@ -8,7 +8,13 @@ router.post('/signup', usersMW.signup, usersMW.cred, usersMW.createSession, (req
 })
 
 router.post('/login', usersMW.login, usersMW.cred, usersMW.createSession, (req, res) => {
-    res.status(202).json(res.locals.cred)
+
+    res.set('Access-Control-Allow-Origin', req.headers.origin)
+    res.set('Access-Control-Allow-Credentials', 'true')
+
+    res.cookie('accessToken', res.locals.cred.accessToken, {sameSite: 'lax'})
+    res.cookie('refreshToken', res.locals.cred.refreshToken, {sameSite: 'lax'})
+    res.status(202).json({username: res.locals.user.username})
 })
 
 

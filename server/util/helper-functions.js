@@ -7,22 +7,38 @@ const handleErrors = (err) => {
     let error = { email: '', password: '' }
 
     //incorrect email
-    if(err.message.includes('auth failed')){
+    if(err.message && err.message.includes('auth failed')){
         error.password = 'Username/Password auth error'
     }
 
     // /// duplicate error code
-    else if(err.code === 11000) {
-        error.email = 'That email is already registered'
+    else if(err.code) {
+        switch(err.code){
+            case 11000:
+                error.email = 'That email is already registered'
+                break;
+            case 1:
+                error.email = 'That email does not exist in our database'
+                break;
+            case 2:
+                error.email = 'Enter an email'
+                break;
+            case 3:
+                error.password = 'Not authenticated'
+                break;
+            default:
+                error = { error: "unknown"}
+                break;
+        }
         return error
     }
     //validation errors
-    else if(err.message.includes('user validation failed')){
+    else if(err.message && err.message.includes('user validation failed')){
         Object.values(err.errors).forEach(({properties}) => {
             error[properties.path] = properties.message
         })
     } else {
-        error = { error: err}
+        error = { error: err }
     }
     return error
 }
