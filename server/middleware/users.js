@@ -35,6 +35,7 @@ usersMW.login = async (req, res, next) => {
 
 usersMW.logout = async (req, res, next) => {
     try {
+        console.log('logout', req.body);
         await sessionModel.deleteOne({jwt: req.body.jwt})
         next()
     } catch (error) {

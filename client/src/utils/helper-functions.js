@@ -3,7 +3,7 @@ export function proxy(path) {
 }
 
 export function storeCred(cred) {
-    console.log('store cred: ', cred);
+    // console.log('store cred: ', cred);
     localStorage.setItem('accessToken', cred.accessToken)
     localStorage.setItem('refreshToken', cred.refreshToken)
 }
@@ -16,7 +16,7 @@ export function isAuthorized(app) {
         refreshToken: localStorage.getItem('refreshToken')
     }
     if(!cred.accessToken) return false;
-    console.log(cred);
+    // console.log(cred);
     // console.log(proxy('/user/auth'));
     fetch(proxy('/user/auth'),{
         method: 'GET',
@@ -28,7 +28,7 @@ export function isAuthorized(app) {
     })
     .then(res => res.json())
     .then(res => {
-        console.log('res auth: ', res);
+        // console.log('res auth: ', res);
         if(res.cred){
             storeCred(res.cred)
         }
@@ -46,7 +46,7 @@ export function isAuthorized(app) {
 
 export function logout() {
     const obj = {
-        jwt: localStorage.getItem('refreshSession')
+        jwt: localStorage.getItem('refreshToken')
     }
 
     fetch(proxy('/user/logout'), {
@@ -54,11 +54,11 @@ export function logout() {
         body: JSON.stringify(obj),
         headers: {'Content-Type': 'application/json'}
     }).then(res => {
-        console.log(res);
+        // console.log(res);
         return res.json()
     })
     .then(res => {
-        console.log(res);
+        // console.log(res);
         localStorage.removeItem('accessToken')
         localStorage.removeItem('refreshToken')
     }).catch(err => {
