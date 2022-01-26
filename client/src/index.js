@@ -15,24 +15,28 @@ import Auth from './pages/auth/Auth.js'
 import { isAuthorized, logout, update } from './utils/helper-functions'
 import { UserSettings } from './pages/userSettings/UserSettings';
 import { GameConfig } from './pages/gameConfig/GameConfig';
+import { Game } from './pages/game/Game';
+
 
 function App() {
 
     const [state, setState] = useState(null)
 
-    const userTemplate = {
-      username: undefined,
-      userGames: [],
-      email: undefined,
+    const stateTemplate = {
+      user: {
+        username: undefined,
+        userGames: [],
+        email: undefined,
+      },
       auth: undefined
     }
 
     const sourceFunctions = {
       setUser: (thisUser) => {
-        userTemplate.username = thisUser.username
-        userTemplate.email = thisUser.email
-        userTemplate.auth = true
-        setState(userTemplate)
+        stateTemplate.user.username = thisUser.username
+        stateTemplate.user.email = thisUser.email
+        stateTemplate.auth = true
+        setState(stateTemplate)
       },
       handleLogout: () => {
         logout()
@@ -66,8 +70,8 @@ function App() {
             <Route path='/login' element={<Auth sourceFunctions={sourceFunctions}/>} />
             <Route path='/signup' element={<Auth sourceFunctions={sourceFunctions} />} />
             <Route path="/account" element={<UserSettings state={state} sourceFunctions={sourceFunctions} />} />
-            <Route path="/game-config" element={<GameConfig />} />
-            {/* <Route path='/game/:id' element={<Game />}/> */}
+            <Route path="/game-config/:step" element={<GameConfig />} />
+            <Route path='/game/:id' element={<Game />}/>
             <Route path="*" element={<NotFoundPage/>} />
           </Routes>
         </Router>
