@@ -14,19 +14,24 @@ const gameSchema = new Schema({
         minlength: [4, "Game title must be at least 4 characters long"],
         unique: true
     },
-    setup: {
-        rules: {
-            type: Object,
-            default: {}
-        },
-        requires: {
-            type: Object,
-            default: {}
-        }
+    description: {
+        type: String,
+        required: [true, 'description is required'],
+        default: 'no description'
     },
-    rating: {
-        type: Number,
-        default: null
+    rules: {
+        type: Object,
+        default: {}
+    },
+    requires: {
+        type: Object,
+        default: {}
+    },
+    metadata: {
+        rating: {
+            type: Number,
+            default: null
+        }
     }
 })
 

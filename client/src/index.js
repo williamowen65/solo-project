@@ -12,7 +12,7 @@ import Welcome from './pages/welcome/Welcome.js'
 import NotFoundPage from './pages/404/NotFoundPage.js'
 import Auth from './pages/auth/Auth.js'
 
-import { isAuthorized, logout, update } from './utils/helper-functions'
+import { isAuthorized, logout, update, createGame } from './utils/helper-functions'
 import { UserSettings } from './pages/userSettings/UserSettings';
 import { GameConfig } from './pages/gameConfig/GameConfig';
 import { Game } from './pages/game/Game';
@@ -57,6 +57,21 @@ function App() {
           }
         })
         console.log(state);
+      },
+      createNewGame: () => {
+        try {
+          const gameData = createGame()
+          console.log(gameData);
+          setState({
+           ...state,
+           user: {
+             ...state.user,
+             userGames: state.user.userGames.concat(123)
+           }
+         })
+        } catch (error) {
+          
+        }
       }
     }
 
@@ -71,8 +86,15 @@ function App() {
             <Route path='/login' element={<Auth sourceFunctions={sourceFunctions}/>} />
             <Route path='/signup' element={<Auth sourceFunctions={sourceFunctions} />} />
             {state && state.auth && <Route path="/account" element={<UserSettings state={state} sourceFunctions={sourceFunctions} />} />}
-            {state && state.auth && <Route path="/game-config/:step" element={<GameConfig />} />}
-            {state && state.auth && <Route path="/user/games" element={<CustomizeGame/>}/>}
+            <Route path="/game-config" element={<GameConfig />}>
+              {state && state.auth && (
+                    <>
+                      <Route path='/game-config/step-1' element={<GameConfig/>}/>
+                      <Route path='/game-config/step-2' element={<GameConfig/>}/>
+                    </>
+              )}
+            </Route>
+            {state && state.auth && <Route path="/user/games" element={<CustomizeGame state={state} sourceFunctions={sourceFunctions}/>}/>}
             <Route path='/game/:id' element={<Game />}/>
             <Route path="*" element={<NotFoundPage/>} />
           </Routes>

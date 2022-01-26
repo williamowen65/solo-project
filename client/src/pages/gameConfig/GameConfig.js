@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react/cjs/react.development'
+import { Step0 } from '../../components/gameConfigSteps/Step0'
 import { Step1 } from '../../components/gameConfigSteps/Step1'
 import { Step2 } from '../../components/gameConfigSteps/Step2'
 
@@ -10,7 +11,7 @@ export function GameConfig(props) {
 
     useEffect(() => {
         const step = location.pathname.split('/')[2]
-        // console.log(step);
+        console.log(step);
         switch (step) {
             case 'step-1':
                 setStep(1)
@@ -19,6 +20,7 @@ export function GameConfig(props) {
                 setStep(2)
                 break;
             default:
+                setStep(0)
                 break;
         }
     }, [location.pathname])
@@ -28,7 +30,8 @@ export function GameConfig(props) {
     }
 
     return (
-        <>
+        <>  
+            {step === 0 && <Step0 />}
             {step === 1 && <Step1 />}
             {step === 2 && <Step2/>}
         </>

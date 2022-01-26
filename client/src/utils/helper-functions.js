@@ -1,3 +1,5 @@
+import gameModel from "../../../server/models/gameModel"
+
 export function proxy(path) {
     return `http://localhost:3000${path}`
 }
@@ -32,12 +34,14 @@ export function isAuthorized(app) {
         if(res.cred){
             storeCred(res.cred)
         }
+        if(res.auth){
+            app(res)
+        }
         /*
         There is an error with this. not dry... two place in code where you can set
         username, auth, userGames: []
         */
-        app(res)
-        return res
+        return
     }).catch(err => {
         console.log(err);
     })
@@ -80,3 +84,12 @@ export function update(field, email) {
         .then(res => console.log(res))
         .catch(err => console.log(err))
     }
+
+export async function createGame() {
+    try {
+        const game = new gameModel({title})
+    } catch (error) {
+        
+    }
+    return 'tests'
+}

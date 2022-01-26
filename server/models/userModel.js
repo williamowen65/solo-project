@@ -19,7 +19,7 @@ const userSchema = new Schema({
     },
     userGames: {
         type: Array,
-        default: Object
+        default: []
     }
 })
 
