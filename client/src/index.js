@@ -37,6 +37,8 @@ function App() {
         stateTemplate.user.username = thisUser.username
         stateTemplate.user.email = thisUser.email
         stateTemplate.auth = true
+        stateTemplate.user.userGames = thisUser.userGames
+        console.log('state template: ', stateTemplate);
         setState(stateTemplate)
       },
       handleLogout: () => {
@@ -70,7 +72,8 @@ function App() {
 
     useEffect(() => {
       //If authorized, then go ahead and query for games
-      if(state && state.auth && state.user.userGames.length > 0){
+      if(state && state.auth && state.user.userGames.length >= 0){
+        console.log('fireeeed');
         //get game info
         getGames(setState, state)
       }
@@ -83,7 +86,7 @@ function App() {
             <Route path='/login' element={<Auth sourceFunctions={sourceFunctions}/>} />
             <Route path='/signup' element={<Auth sourceFunctions={sourceFunctions} />} />
             {state && state.auth && <Route path="/account" element={<UserSettings state={state} sourceFunctions={sourceFunctions} />} />}
-            <Route path="/game-config" element={<GameConfig />}>
+            <Route path="/game-config" element={<GameConfig state={state}/>}>
               {state && state.auth && (
                     <>
                       <Route path='/game-config/step-1' element={<GameConfig/>}/>

@@ -7,7 +7,8 @@ router.post('/signup', usersMW.signup, usersMW.cred, usersMW.createSession, (req
     res.status(201).json({
         user: {
             username: res.locals.newUser.username,
-            email: res.locals.newUser.email
+            email: res.locals.newUser.email,
+            userGames: res.locals.newUser.userGames
         },
         cred: res.locals.cred
     })
@@ -20,10 +21,12 @@ router.post('/login', usersMW.login, usersMW.cred, usersMW.createSession, (req, 
 
     // res.cookie('accessToken', res.locals.cred.accessToken, {sameSite: 'lax'})
     // res.cookie('refreshToken', res.locals.cred.refreshToken, {sameSite: 'lax'})
+    // console.log(res.locals.user);
     res.status(202).json({
         user: {
             username: res.locals.user.username,
-            email: res.locals.user.email
+            email: res.locals.user.email,
+            userGames: res.locals.user.userGames
         },
         cred: res.locals.cred
     })

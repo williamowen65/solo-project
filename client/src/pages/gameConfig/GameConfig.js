@@ -5,7 +5,7 @@ import { Step0 } from '../../components/gameConfigSteps/Step0'
 import { Step1 } from '../../components/gameConfigSteps/Step1'
 import { Step2 } from '../../components/gameConfigSteps/Step2'
 
-export function GameConfig(props) {
+export function GameConfig({state}) {
     const location = useLocation()
     const [step, setStep] = useState(1)
 
@@ -32,7 +32,7 @@ export function GameConfig(props) {
     return (
         <>  
             {step === 0 && <Step0 />}
-            {step === 1 && <Step1 />}
+            {step === 1 && state.games && <Step1 state={state}/>}
             {step === 2 && <Step2/>}
         </>
     )
