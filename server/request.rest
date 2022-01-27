@@ -33,3 +33,11 @@ Content-Type: application/json
 {
     "title": "testsss"
 }
+
+### 
+GET http://localhost:3000/games/user
+Content-Type: application/json
+
+{
+    "ids": ["61f230c456413b13efedbd6a", "61f230a856413b13efedbd67"]
+}
