@@ -5,7 +5,10 @@ const router = express.Router();
 
 router.post('/signup', usersMW.signup, usersMW.cred, usersMW.createSession, (req, res) => {
     res.status(201).json({
-        username: res.locals.newUser.username,
+        user: {
+            username: res.locals.newUser.username,
+            email: res.locals.newUser.email
+        },
         cred: res.locals.cred
     })
 })

@@ -1,7 +1,7 @@
 form {
     border: 1px solid black;
     padding: 30px 50px;
-    margin-top: 20vh;
+    margin-top: 5vh;
     h1 {
         margin-top: 0; 
     }
@@ -21,21 +21,5 @@ form {
         margin: 0px;
         color: red;
     }
-    .btns {
-        display: flex;
-        justify-content: space-between;
-        .btn {
-            cursor: pointer;
-            border: 1px solid grey;
-            padding: 2px 5px;
-            border-radius: 3px;
-            background-color: lightblue;
-            color: inherit;
-            font-family: inherit;
-            font-size: inherit;
-            &:hover {
-                background-color: rgb(91, 182, 212);
-            }
-        }
-    }
+    
 }

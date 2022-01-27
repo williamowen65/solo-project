@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { DetailsField } from '../../components/detailsField/DetailsField'
+import { DetailsField } from './detailsField/DetailsField'
 
 export function UserSettings({state, sourceFunctions }) {
     

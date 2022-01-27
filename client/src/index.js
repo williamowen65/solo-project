@@ -94,7 +94,11 @@ function App() {
                     </>
               )}
             </Route>
-            {state && state.auth && <Route path="/user/games" element={<CustomizeGame state={state} sourceFunctions={sourceFunctions}/>}/>}
+            {state && state.auth && (
+              <Route path="/user/games" element={<CustomizeGame state={state} sourceFunctions={sourceFunctions}/>}>
+                <Route path="/user/games/new" element={<CustomizeGame state={state} sourceFunctions={sourceFunctions}/>}/>
+              </Route>
+            )}
             <Route path='/game/:id' element={<Game />}/>
             <Route path="*" element={<NotFoundPage/>} />
           </Routes>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function TableRow({datas,  customizeFunctions: {handleEditMode}}) {
     const data = {
@@ -21,7 +22,7 @@ function TableRow({datas,  customizeFunctions: {handleEditMode}}) {
 }
 
 export function Table({state, customizeFunctions}) {
-    const {startPrompt} = customizeFunctions
+    const navigate = useNavigate()
     const games = []
     console.log(state);
     state.user.userGames.forEach((game, i) => {
@@ -34,7 +35,7 @@ export function Table({state, customizeFunctions}) {
         <>
             <header className='your-games'>
                 <h1>Your games</h1>
-                <button onClick={startPrompt}>Create New Game</button>
+                <button onClick={() => navigate('/user/games/new')}>Create New Game</button>
             </header>
             <table>
                 <thead>

@@ -3,7 +3,7 @@
 @import '../pages/userSettings/userSettings.scss';
 @import '../pages/gameConfig/gameConfig.scss';
 @import '../pages/customizeGame/customizeGame.scss';
-@import '../components/detailsField/detailsField.scss';
+@import '../pages/userSettings/detailsField/detailsField.scss';
 
 
 body {
@@ -14,3 +14,24 @@ body {
     margin: 0;
     cursor: default;
 }
+.btns {
+        display: flex;
+        justify-content: space-between;
+        &.right {
+            justify-content: end;
+        }
+        .btn {
+            cursor: pointer;
+            border: 1px solid grey;
+            padding: 2px 5px;
+            border-radius: 3px;
+            background-color: lightblue;
+            color: inherit;
+            font-family: inherit;
+            font-size: inherit;
+            &:hover {
+                background-color: rgb(91, 182, 212);
+            }
+           
+        }
+    }
