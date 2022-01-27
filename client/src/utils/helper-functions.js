@@ -84,13 +84,23 @@ export function update(field, email) {
         .catch(err => console.log(err))
     }
 
-export function createGame(game) {
+export function createGame(game, handleUpdateUser) {
  
         fetch(proxy('/games/create'), {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(game) 
         }).then(res => res.json())
-        .then(res => console.log(res))
+        .then(res => {
+            console.log(res)
+            if(res.error) throw new Error(res)
+            //update database {$push: {userGames: 23123131243}}
+            const updateObj = {
+                name: 'userGames',
+                value: res.game._id
+            }
+            console.log(updateObj);
+            handleUpdateUser(updateObj)
+        })
         .catch(err => console.log(err))
 }

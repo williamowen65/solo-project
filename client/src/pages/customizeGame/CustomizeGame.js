@@ -7,7 +7,7 @@ import { Step3 } from '../../components/userGames/Step3'
 import { Table } from '../../components/userGames/Table'
 import { createGame } from '../../utils/helper-functions'
 
-export function CustomizeGame({state, sourceFunctions: {createNewGame}}) {
+export function CustomizeGame({state, sourceFunctions: {createNewGame, handleUpdateUser}}) {
     const location = useLocation()
     const navigate = useNavigate()
     const [localState, setLocalState] = useState({ step: 0})
@@ -29,6 +29,7 @@ export function CustomizeGame({state, sourceFunctions: {createNewGame}}) {
             })
         },
         handleFormInfo: (e) => {
+            // Keep state up to date onKeyPress
             const name = e.target.id
             const value = e.target.value
             const updates = {...localState}
@@ -63,7 +64,7 @@ export function CustomizeGame({state, sourceFunctions: {createNewGame}}) {
             title: localState.title,
             desc: localState.desc
         }
-        createGame(game)
+        createGame(game, handleUpdateUser)
         navigate('/user/games')
     }
 

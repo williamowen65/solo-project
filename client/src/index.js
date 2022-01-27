@@ -48,7 +48,10 @@ function App() {
         // console.log(state);
         const updates = {}
         updates[field.name] = field.value
-        update(field, state.user.email)
+        update(field, state.user.email) /// Note just uses the email as a unique id for query, field contains the changes
+        if(field.name === 'userGames'){
+          updates[field.name] = state.user.userGames.concat(field.value)
+        }
         setState({
           ...state,
           user: {

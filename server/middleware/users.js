@@ -88,9 +88,12 @@ usersMW.createSession = async (req, res, next) => {
 
 usersMW.updateAccount = async (req, res, next) => {
     console.log('body: ', req.body);
-    const update = {}
+    let update = {}
     update[req.body.field.name] = req.body.field.value
-    console.log(update);
+    if(req.body.field.name === 'userGames'){
+        update = {"$push": update}
+    } 
+    console.log('the update: ', update);
     try {
 
         // const user = await userModel.findOne({email: req.body.email})
@@ -144,5 +147,9 @@ usersMW.authorize = async (req, res, next) => {
     }
 }
 
+
+usersMW.getGameInfo = (req, res, next) => {
+
+}
 
 module.exports = usersMW

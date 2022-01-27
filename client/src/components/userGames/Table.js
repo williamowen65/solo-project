@@ -25,9 +25,9 @@ export function Table({state, customizeFunctions}) {
     const navigate = useNavigate()
     const games = []
     console.log(state);
-    state.user.userGames.forEach((game, i) => {
-        games.push(<TableRow key={i} data={game}/>)
-    })
+    // state.user.userGames.forEach((game, i) => {
+    //     games.push(<TableRow key={i} data={game}/>)
+    // })
 
     console.log(games);
 

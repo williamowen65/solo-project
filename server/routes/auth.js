@@ -34,7 +34,7 @@ router.patch('/', usersMW.updateAccount, (req, res) => {
     res.json({pinged: `update user info`})
 })
 
-router.get('/auth', usersMW.authorize, usersMW.cred, usersMW.createSession, (req, res) => {
+router.get('/auth', usersMW.authorize, usersMW.getGameInfo, usersMW.cred, usersMW.createSession, (req, res) => {
     console.log(res.locals);
     res.json({
         username: res.locals.user,
