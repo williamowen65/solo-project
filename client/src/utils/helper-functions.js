@@ -108,6 +108,7 @@ export function createGame(game, handleUpdateUser) {
         .catch(err => console.log(err))
 }
 
+///Get a users own games details, and gets a lists of all publicGames
 export function getGames(setState, state) {
     // console.log('getting games', array);
     const accessToken = localStorage.getItem('accessToken')
@@ -118,9 +119,13 @@ export function getGames(setState, state) {
         }
     }).then(res => res.json())
     .then(res => {
+        console.log(res);
         setState({
             ...state,
-            games: res.games
+            games: {
+                userGames: res.games.userGames,
+                publicGames: res.games.publicGames
+            }
         })
     })
     .catch(err => console.log(err))

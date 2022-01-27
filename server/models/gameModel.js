@@ -60,6 +60,11 @@ const gameSchema = new Schema({
         rating: {
             type: Number,
             default: null
+        },
+        status: {
+            type: String,
+            default: 'private',
+            required: true
         }
     }
 })

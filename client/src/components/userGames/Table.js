@@ -1,12 +1,17 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+/// THERE ARE TWO COMPONENTS ON THIS PAGE
+
 function TableRow({game: {
     title,
     description,
     rules,
     setup,
-    metadata
+    metadata: {
+        rating,
+        status
+    }
 },  customizeFunctions: {handleEditMode}}) {
   
     return (
@@ -14,9 +19,9 @@ function TableRow({game: {
             <input type="checkbox" onChange={handleEditMode}/>
             <td>{title}</td>
             <td>{description}</td>
-            {/* <td>{rules}</td>
-            <td>{setup}</td> */}
-            {/* <td>{status}</td> */}
+            <td>rules</td>
+            <td>setup</td>
+            <td>{status}</td>
         </tr>
     )
 }
@@ -26,7 +31,7 @@ export function Table({state, customizeFunctions}) {
     const games = []
     console.log(state);
     if(state.games){
-        state.games.forEach((game, i) => {
+        state.games.userGames.forEach((game, i) => {
             games.push(<TableRow key={i} game={game} customizeFunctions={customizeFunctions}/>)
         })
     }

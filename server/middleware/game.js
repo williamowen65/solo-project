@@ -17,10 +17,10 @@ gameMW.create = async (req, res, next) => {
     }
 }
 
-gameMW.find = async (req, res, next) => {
+gameMW.findAllPublic = async (req, res, next) => {
     try {
-        const games = await gameModel.find()
-        res.locals.games = games
+        const games = await gameModel.find({'metadata.status': 'public'}, {title: 1, description: 1, 'setup.players.numAllowed': 1})
+        res.locals.publicGames = games
         next()
     } catch (error) {
         next(error)
@@ -41,7 +41,7 @@ gameMW.getUserGames = async (req, res, next) => {
     
         const games = await gameModel.find({_id: {$in: ids }})
         // console.log(games);
-        res.locals.games = games
+        res.locals.userGames = games
         next()
     } catch (error) {
         next(error)
