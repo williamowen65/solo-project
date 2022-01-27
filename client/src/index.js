@@ -24,6 +24,9 @@ function App() {
     const [state, setState] = useState(null)
 
     const stateTemplate = {
+      games: {
+        userGames: []
+      },
       user: {
         username: undefined,
         userGames: [],
@@ -45,7 +48,7 @@ function App() {
         logout()
         setState(null)
       },
-      handleUpdateUser: (field) => {
+      handleUpdateUser: (field, newUserGame) => {
         // console.log(field);
         // console.log(state);
         const updates = {}
@@ -54,13 +57,28 @@ function App() {
         if(field.name === 'userGames'){
           updates[field.name] = state.user.userGames.concat(field.value)
         }
-        setState({
-          ...state,
-          user: {
-            ...state.user,
-            ...updates
-          }
-        })
+        console.log(newUserGame, state);
+        if(newUserGame){
+          setState({
+            ...state,
+            user: {
+              ...state.user,
+              ...updates
+            },
+            games: {
+              ...state.games,
+              userGames: state.games.userGames.concat(newUserGame)
+            }
+          })
+        } else {
+          setState({
+            ...state,
+            user: {
+              ...state.user,
+              ...updates
+            }
+          })
+        }
         console.log(state);
       }
     }
@@ -114,3 +132,6 @@ ReactDOM.render(
    </React.StrictMode>,
   document.getElementById('root')
 );
+
+
+

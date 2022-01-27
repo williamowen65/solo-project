@@ -103,7 +103,7 @@ export function createGame(game, handleUpdateUser) {
                 value: res.game._id
             }
             console.log(updateObj);
-            handleUpdateUser(updateObj)
+            handleUpdateUser(updateObj, res.game)
         })
         .catch(err => console.log(err))
 }

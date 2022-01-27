@@ -23,7 +23,7 @@ export function Step1({state: {
                 <div>
                     <h2>Choose a game</h2>
                     <select name="games" id="games" onChange={() => navigate('/game-config/step-2')}>
-                        <option selected='true' disabled>Select</option>
+                        <option selected={true} disabled>Select</option>
                         <option value="go-fish">Go Fish</option>
                         <option value="poker">Poker</option>
                         <option value="lucky">Lucky</option>
@@ -33,20 +33,20 @@ export function Step1({state: {
 
                     <h2>Your custom games</h2>
                     <select name="your-games" id="your-games">
-                        <option selected='true' disabled>Select</option>
-                        {userGames.map(doc => (
-                            <option value="none">{doc.title}</option>
+                        <option selected={true} disabled>Select</option>
+                        {userGames.map((doc, i) => (
+                            <option value="none" key={i}>{doc.title}</option>
                         ))}
                     </select>
 
 
                     <h2>Other users games</h2>
                     <select name="" id="">
-                        <option selected='true' disabled>Select</option>
+                        <option selected={true} disabled>Select</option>
                        
-                         {publicGames.map(doc => {
-                            if(!yourGameTitles.some(title => doc.title === title)){
-                                return <option value="none">{doc.title}</option>
+                         {publicGames.map((doc, i) => {
+                            if(!yourGameTitles.some((title) => doc.title === title)){
+                                return <option value="none" key={i}>{doc.title}</option>
                             }
                         })}
                     </select>
