@@ -10,6 +10,10 @@ router.post('/create', gameMW.create, (req, res) => {
     res.json({game: res.locals.game})
 })
 
+router.get('/user',gameMW.getUserGames, (req, res) => {
+    res.json({games: res.locals.games})
+})
+
 
 
 module.exports = router

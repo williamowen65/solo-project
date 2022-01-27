@@ -29,18 +29,21 @@ export function isAuthorized(app) {
     })
     .then(res => res.json())
     .then(res => {
-        // console.log('res auth: ', res);
+        console.log('res auth: ', res, 'hi');
         if(res.cred){
             storeCred(res.cred)
+            return true
         }
         if(res.auth){
             app(res)
+            return true
         }
         /*
         There is an error with this. not dry... two place in code where you can set
         username, auth, userGames: []
         */
-        return
+       console.log('nope');
+        return false
     }).catch(err => {
         console.log(err);
     })
@@ -103,4 +106,23 @@ export function createGame(game, handleUpdateUser) {
             handleUpdateUser(updateObj)
         })
         .catch(err => console.log(err))
+}
+
+export function getGames(setState, state) {
+    // console.log('getting games', array);
+    const accessToken = localStorage.getItem('accessToken')
+    fetch(proxy('/games/user'), {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        }
+    }).then(res => res.json())
+    .then(res => {
+        setState({
+            ...state,
+            games: res.games
+        })
+    })
+    .catch(err => console.log(err))
+
 }

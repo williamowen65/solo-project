@@ -1,22 +1,22 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function TableRow({datas,  customizeFunctions: {handleEditMode}}) {
-    const data = {
-        title: 'test',
-        description: 'fsdfd',
-        rules: 'dfsdfd',
-        setup: 'dfdfsd',
-        status: 'private'
-    }
+function TableRow({game: {
+    title,
+    description,
+    rules,
+    setup,
+    metadata
+},  customizeFunctions: {handleEditMode}}) {
+  
     return (
         <tr>
             <input type="checkbox" onChange={handleEditMode}/>
-            <td>{data.title}</td>
-            <td>{data.description}</td>
-            <td>{data.rules}</td>
-            <td>{data.setup}</td>
-            <td>{data.status}</td>
+            <td>{title}</td>
+            <td>{description}</td>
+            {/* <td>{rules}</td>
+            <td>{setup}</td> */}
+            {/* <td>{status}</td> */}
         </tr>
     )
 }
@@ -25,9 +25,11 @@ export function Table({state, customizeFunctions}) {
     const navigate = useNavigate()
     const games = []
     console.log(state);
-    // state.user.userGames.forEach((game, i) => {
-    //     games.push(<TableRow key={i} data={game}/>)
-    // })
+    if(state.games){
+        state.games.forEach((game, i) => {
+            games.push(<TableRow key={i} game={game} customizeFunctions={customizeFunctions}/>)
+        })
+    }
 
     console.log(games);
 
@@ -50,9 +52,7 @@ export function Table({state, customizeFunctions}) {
                     </tr>
                 </thead>
                 <tbody>
-                   {/* <TableRow  customizeFunctions={customizeFunctions}/>
-                   <TableRow  customizeFunctions={customizeFunctions}/>
-                   <TableRow  customizeFunctions={customizeFunctions}/> */}
+                    {games}
                 </tbody>          
             </table>  
         </>

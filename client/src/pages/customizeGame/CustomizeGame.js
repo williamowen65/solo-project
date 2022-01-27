@@ -7,7 +7,7 @@ import { Step3 } from '../../components/userGames/Step3'
 import { Table } from '../../components/userGames/Table'
 import { createGame } from '../../utils/helper-functions'
 
-export function CustomizeGame({state, sourceFunctions: {createNewGame, handleUpdateUser}}) {
+export function CustomizeGame({state, sourceFunctions: { handleUpdateUser}}) {
     const location = useLocation()
     const navigate = useNavigate()
     const [localState, setLocalState] = useState({ step: 0})

@@ -12,7 +12,7 @@ import Welcome from './pages/welcome/Welcome.js'
 import NotFoundPage from './pages/404/NotFoundPage.js'
 import Auth from './pages/auth/Auth.js'
 
-import { isAuthorized, logout, update, createGame } from './utils/helper-functions'
+import { isAuthorized, logout, update, getGames } from './utils/helper-functions'
 import { UserSettings } from './pages/userSettings/UserSettings';
 import { GameConfig } from './pages/gameConfig/GameConfig';
 import { Game } from './pages/game/Game';
@@ -60,27 +60,21 @@ function App() {
           }
         })
         console.log(state);
-      },
-      createNewGame: () => {
-        try {
-          const gameData = createGame()
-          console.log(gameData);
-          setState({
-           ...state,
-           user: {
-             ...state.user,
-             userGames: state.user.userGames.concat(123)
-           }
-         })
-        } catch (error) {
-          
-        }
       }
     }
 
     useEffect(() => {
+      //check for auth on load
       isAuthorized(setState)
     }, [])
+
+    useEffect(() => {
+      //If authorized, then go ahead and query for games
+      if(state && state.auth && state.user.userGames.length > 0){
+        //get game info
+        getGames(setState, state)
+      }
+    }, [state && state.auth ? state.auth : null])
 
     return (
         <Router>

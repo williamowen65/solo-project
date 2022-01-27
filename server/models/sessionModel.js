@@ -8,6 +8,11 @@ const sessionSchema = new Schema({
         type: String,
         required: [true, 'jwt not provided'],
         unique: true
+    },
+    createdAt: {
+        type: Date,
+        expires: 60 * 60 * 24,
+        default: Date.now
     }
 })
 

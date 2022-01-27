@@ -35,7 +35,7 @@ usersMW.login = async (req, res, next) => {
 
 usersMW.logout = async (req, res, next) => {
     try {
-        console.log('logout', req.body);
+        // console.log('logout', req.body);
         await sessionModel.deleteOne({jwt: req.body.jwt})
         next()
     } catch (error) {
@@ -45,7 +45,7 @@ usersMW.logout = async (req, res, next) => {
 
 usersMW.cred = (req, res, next) => {
     const user = res.locals.newUser || res.locals.user
-    console.log('user: ', user, user.id, user._id);
+    // console.log('user: ', user, user.id, user._id);
     if(user){
         res.locals.cred = {
             accessToken: generateAccessToken(user.id),
@@ -73,7 +73,7 @@ usersMW.signup = async (req, res, next) => {
 
 usersMW.createSession = async (req, res, next) => {
     try {
-        console.log('from createSess:', res.locals.cred);
+        // console.log('from createSess:', res.locals.cred);
         const session = new sessionModel({ jwt: res.locals.cred.refreshToken })
         const mySession = await session.save()
         if(mySession){
@@ -87,13 +87,13 @@ usersMW.createSession = async (req, res, next) => {
 }
 
 usersMW.updateAccount = async (req, res, next) => {
-    console.log('body: ', req.body);
+    // console.log('body: ', req.body);
     let update = {}
     update[req.body.field.name] = req.body.field.value
     if(req.body.field.name === 'userGames'){
         update = {"$push": update}
     } 
-    console.log('the update: ', update);
+    // console.log('the update: ', update);
     try {
 
         // const user = await userModel.findOne({email: req.body.email})
@@ -113,9 +113,9 @@ usersMW.authorize = async (req, res, next) => {
         if(await jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET)){
 
             const tokenBody = jwt.decode(accessToken, process.env.ACCESS_TOKEN_SECRET)
-            console.log(tokenBody);
+            // console.log(tokenBody);
             const user = await userModel.findOne({_id: tokenBody._id})
-            console.log(user);
+            // console.log(user);
             res.json({
                 auth: true,
                 user: {
