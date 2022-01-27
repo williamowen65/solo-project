@@ -131,3 +131,7 @@ export function getGames(setState, state) {
     .catch(err => console.log(err))
 
 }
+
+export function updateStatus(id, setState, state) {
+    console.log(id, state);
+}

@@ -8,31 +8,55 @@ function TableRow({game: {
     description,
     rules,
     setup,
+    _id,
     metadata: {
         rating,
         status
     }
-},  customizeFunctions: {handleEditMode}}) {
+},  customizeFunctions: {handleEditMode},
+ sourceFunctions: {tableFunctions: {handleStatus}}}) {
   
+    const handleClick = (e, id) => {
+        if(document.getElementById(id).classList.contains('edit')){
+            const classArray = [] 
+            e.target.classList.forEach(el => classArray.push(el))
+            const type = classArray.find(el => el.match(/title|description|rules|setup|status/))
+            console.log(type);
+            switch (type) {
+                case 'status':
+                    handleStatus(id)
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+    }
+
+
     return (
-        <tr>
+        <tr onClick={(e) => handleClick(e, _id)} id={_id}>
             <input type="checkbox" onChange={handleEditMode}/>
-            <td>{title}</td>
-            <td>{description}</td>
-            <td>rules</td>
-            <td>setup</td>
-            <td>{status}</td>
+            <td className='title'>{title}</td>
+            <td className='preview description'>{description}</td>
+            <td className='preview rules'>rules</td>
+            <td className='preview setup'>setup</td>
+            <td className='status'>{status}</td>
         </tr>
     )
 }
 
-export function Table({state, customizeFunctions}) {
+export function Table({state, customizeFunctions, sourceFunctions}) {
     const navigate = useNavigate()
     const games = []
     console.log(state);
     if(state.games){
         state.games.userGames.forEach((game, i) => {
-            games.push(<TableRow key={i} game={game} customizeFunctions={customizeFunctions}/>)
+            games.push((
+                <>
+                <TableRow key={i} game={game} customizeFunctions={customizeFunctions} sourceFunctions={sourceFunctions}/>
+                </>
+            ))
         })
     }
 

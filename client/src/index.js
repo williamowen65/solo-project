@@ -12,7 +12,7 @@ import Welcome from './pages/welcome/Welcome.js'
 import NotFoundPage from './pages/404/NotFoundPage.js'
 import Auth from './pages/auth/Auth.js'
 
-import { isAuthorized, logout, update, getGames } from './utils/helper-functions'
+import { isAuthorized, logout, update, getGames, updateStatus } from './utils/helper-functions'
 import { UserSettings } from './pages/userSettings/UserSettings';
 import { GameConfig } from './pages/gameConfig/GameConfig';
 import { Game } from './pages/game/Game';
@@ -80,6 +80,11 @@ function App() {
           })
         }
         console.log(state);
+      },
+      tableFunctions: {
+        handleStatus: (id) => {
+          updateStatus(id, setState, state)
+        }
       }
     }
 

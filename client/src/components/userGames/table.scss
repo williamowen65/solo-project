@@ -1,24 +1,38 @@
 table{
     width: 70vw;
     margin: 30px auto 0;
+    border-collapse: collapse;
     thead{
         background-color: aquamarine;
         td{
             border: 1px solid black;
-
+            padding: 4px 16px;
         }
     }
-    td#edit {
-        width: 5px;
+    td{
+        white-space: pre-line;
+        max-width: 200px;
+        max-height: 10px;
+        overflow: hidden;
+        &#edit {
+            width: 5px;
+        }
     }
     tr{
+        position: relative;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.233);
+        border-left: 1px solid rgba(0, 0, 0, 0.233);
+        border-right: 1px solid rgba(0, 0, 0, 0.233);
         &:first-child{
             margin-right: 30px;
         }
     }
     tbody{
-        tr{
-            cursor: pointer;
+        td{
+            &.preview {
+                cursor: pointer;
+            }
+            padding: 20px 10px;
         }
         tr.edit {
             td{
@@ -32,5 +46,11 @@ table{
     }
     input[type=checkbox]{
         cursor: pointer;
+        display: block;
+        margin: auto auto;
+        position: absolute;
+        top: 50%; left: 21px;
+        transform: translateY(-50%) scale(1.3);
+        
     }
 }

@@ -7,7 +7,8 @@ import { Step3 } from '../../components/userGames/Step3'
 import { Table } from '../../components/userGames/Table'
 import { createGame } from '../../utils/helper-functions'
 
-export function CustomizeGame({state, sourceFunctions: { handleUpdateUser}}) {
+export function CustomizeGame({state, sourceFunctions}) {
+    const{ handleUpdateUser} = sourceFunctions;
     const location = useLocation()
     const navigate = useNavigate()
     const [localState, setLocalState] = useState({ step: 0})
@@ -62,7 +63,7 @@ export function CustomizeGame({state, sourceFunctions: { handleUpdateUser}}) {
         e.preventDefault()
         const game = {
             title: localState.title,
-            desc: localState.desc
+            description: localState.description
         }
         createGame(game, handleUpdateUser)
         navigate('/user/games')
@@ -70,7 +71,7 @@ export function CustomizeGame({state, sourceFunctions: { handleUpdateUser}}) {
 
     return (
         <>
-            {localState.step === 0 && <Table customizeFunctions={customizeFunctions} state={state}/>}
+            {localState.step === 0 && <Table customizeFunctions={customizeFunctions} sourceFunctions={sourceFunctions} state={state}/>}
             {localState.createMode && (
                 <>
                     <header className='your-games'>
