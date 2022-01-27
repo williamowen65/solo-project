@@ -7,7 +7,7 @@ export default function NotFoundPage(props) {
     return (
         <>
             <h1>404</h1>
-            <p>This page either doesn't exist or you are not logged in</p>
+            <p>This page either doesn't exist or you are not logged in or the server has crashed</p>
             <button onClick={() => navigate('/')}>Go to home page</button>
         </>
     )

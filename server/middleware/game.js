@@ -48,6 +48,27 @@ gameMW.getUserGames = async (req, res, next) => {
     }
 }
 
+gameMW.update = async (req, res, next) => {
+    const type = Object.keys(req.body.payload)[0]
+    let update;
+    switch (type) {
+        case 'status':
+            update = {'metadata.status': req.body.payload[type]}
+            break;
+    
+        default:
+            break;
+    }
+
+    try {
+        const game = await gameModel.findByIdAndUpdate(req.body.id, update, {new: true})
+        // console.log(game);
+        next()
+    } catch (error) {
+        next(error)
+    }
+}
+
 
 
 

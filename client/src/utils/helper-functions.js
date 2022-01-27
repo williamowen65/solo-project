@@ -132,6 +132,36 @@ export function getGames(setState, state) {
 
 }
 
-export function updateStatus(id, setState, state) {
+export function updateStatus(id, payload, setState, state) {
     console.log(id, state);
+    const obj = {
+        id,
+        payload: {
+            status: payload
+        }
+    }
+    console.log(obj);
+    fetch(proxy('/games/update'),{
+        method: 'PATCH',
+        body: JSON.stringify(obj),
+        headers: {'Content-Type': 'application/json'}
+    }).then(res => res.json())
+    .then(res => {
+        if(res.update){
+            const updatedArr = state.games.userGames.map(doc => {
+                if(doc._id === id){
+                    doc.metadata.status = payload
+                }
+                return doc
+            })
+            setState({
+                ...state,
+                games: {
+                    ...state.games,
+                    userGames: updatedArr
+                }
+            })
+        }
+    })
+    .catch(err => console.log(err))
 }

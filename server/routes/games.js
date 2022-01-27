@@ -17,6 +17,10 @@ router.get('/user',gameMW.getUserGames, gameMW.findAllPublic, (req, res) => {
     }})
 })
 
+router.patch('/update', gameMW.update, (req, res) => {
+    res.json({update: 'success'})
+})
+
 
 
 module.exports = router

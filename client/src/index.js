@@ -82,8 +82,8 @@ function App() {
         console.log(state);
       },
       tableFunctions: {
-        handleStatus: (id) => {
-          updateStatus(id, setState, state)
+        handleStatus: (id, payload) => {
+          updateStatus(id, payload, setState, state)
         }
       }
     }

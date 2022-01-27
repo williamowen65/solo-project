@@ -24,7 +24,8 @@ function TableRow({game: {
             console.log(type);
             switch (type) {
                 case 'status':
-                    handleStatus(id)
+                    const payload = status === 'private' ? 'public' : 'private'
+                    handleStatus(id, payload)
                     break;
             
                 default:
