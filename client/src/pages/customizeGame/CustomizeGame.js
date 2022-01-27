@@ -5,6 +5,7 @@ import { Step1 } from '../../components/userGames/Step1'
 import { Step2 } from '../../components/userGames/Step2'
 import { Step3 } from '../../components/userGames/Step3'
 import { Table } from '../../components/userGames/Table'
+import { createGame } from '../../utils/helper-functions'
 
 export function CustomizeGame({state, sourceFunctions: {createNewGame}}) {
     const location = useLocation()
@@ -26,6 +27,13 @@ export function CustomizeGame({state, sourceFunctions: {createNewGame}}) {
                 ...localState,
                 step: localState.step - 1
             })
+        },
+        handleFormInfo: (e) => {
+            const name = e.target.id
+            const value = e.target.value
+            const updates = {...localState}
+            updates[name] = value
+            setLocalState(updates)
         }
     }
 
@@ -36,7 +44,7 @@ export function CustomizeGame({state, sourceFunctions: {createNewGame}}) {
             console.log(path);
             switch (path) {
                 case 'new':
-                    setLocalState({createMode: true, step: 2})
+                    setLocalState({createMode: true, step: 1})
                     break;
                 case 'games':
                     setLocalState({createMode: false, step: 0})
@@ -49,7 +57,15 @@ export function CustomizeGame({state, sourceFunctions: {createNewGame}}) {
 
     }, [location.pathname])
   
-
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const game = {
+            title: localState.title,
+            desc: localState.desc
+        }
+        createGame(game)
+        navigate('/user/games')
+    }
 
     return (
         <>
@@ -59,7 +75,7 @@ export function CustomizeGame({state, sourceFunctions: {createNewGame}}) {
                     <header className='your-games'>
                         <h1>Create Game</h1>
                     </header>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         {localState.step === 1 && <Step1 customizeFunctions={customizeFunctions}/>}
                         {localState.step === 2 && <Step2 customizeFunctions={customizeFunctions}/>}
                         {localState.step === 3 && <Step3 customizeFunctions={customizeFunctions}/>}

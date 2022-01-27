@@ -4,8 +4,10 @@ const gameMW = {}
 
 gameMW.create = async (req, res, next) => {
     try {
+        console.log('ping');
         const game = new gameModel(req.body)
         await game.save()
+        res.locals.game = game
         next()
         
     } catch (error) {

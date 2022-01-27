@@ -56,8 +56,7 @@ console.log('DBURI: ', dbURI);
 async function dbConnect() {
     return mongoose.connect(dbURI, { 
         useNewUrlParser: true, 
-        useUnifiedTopology: true,
-        autoIndex: true
+        useUnifiedTopology: true
     })
 }
 

@@ -1,4 +1,3 @@
-import gameModel from "../../../server/models/gameModel"
 
 export function proxy(path) {
     return `http://localhost:3000${path}`
@@ -85,11 +84,13 @@ export function update(field, email) {
         .catch(err => console.log(err))
     }
 
-export async function createGame() {
-    try {
-        const game = new gameModel({title})
-    } catch (error) {
-        
-    }
-    return 'tests'
+export function createGame(game) {
+ 
+        fetch(proxy('/games/create'), {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(game) 
+        }).then(res => res.json())
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
 }

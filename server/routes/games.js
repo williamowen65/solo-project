@@ -7,7 +7,7 @@ router.get('/', gameMW.find, (req, res) => {
     res.json(res.locals.games)
 })
 router.post('/create', gameMW.create, (req, res) => {
-    res.send(`game created`)
+    res.json({game: res.locals.game})
 })
 
 

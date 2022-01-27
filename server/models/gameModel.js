@@ -20,12 +20,41 @@ const gameSchema = new Schema({
         default: 'no description'
     },
     rules: {
-        type: Object,
-        default: {}
+        round: {
+            type: Array,
+            required: true,
+            default: []
+        }
     },
-    requires: {
-        type: Object,
-        default: {}
+    setup: {
+        table: {
+            deck: {
+                numDecks: {
+                    type: Number,
+                    required: true,
+                    default: 1
+                },
+                placement: {
+                    type: Array,
+                    required: true,
+                    default: []
+                }
+            }
+        },
+        players: {
+            numAllowed: {
+                type: Number,
+                required: true,
+                default: 4
+            },
+            hand: {
+                numStart: {
+                    type: Number,
+                    required: true,
+                    default: 5
+                }
+            }
+        }
     },
     metadata: {
         rating: {
