@@ -1,0 +1,57 @@
+// @import url('../../assets/imgs/cardsSprite.png');
+
+.card {
+   
+    background: rgb(193, 221, 177);
+    margin: 10px;
+    position: absolute;
+    transform-origin: bottom left;
+    top:50%;
+    left:50%;
+    border: 1px solid black;
+    @mixin cardShape {
+        
+    }
+    &.myHand{
+        $width: 150px;
+        width: $width;
+        height: $width * 1.4;
+        // background-image: url('../../assets/imgs/cardsSprite.png');
+        background-size: 2126px;
+    }
+    &.opponent{
+        $width: 50px;
+        width: $width;
+        height: $width * 1.4;
+        // background-image: url('/public/imgs/cardback.jpg');
+        background-size: $width + 5px;
+        background-position: -2.5px, -5px;
+    }
+    &.tableCard{
+        $width: 25px;
+        width: $width;
+        height: $width * 1.4;
+        position: relative;
+        // border: 0.01px solid black;
+    }
+    &.deck {
+        $width: 25px;
+        width: $width;
+        height: $width * 1.4;
+    }
+}
+
+/// The angle of a card is determined via javascript
+
+.hand{
+    display: flex;
+    // justify-content: center;
+    // width: 100%;
+    text-align: center;
+}
+
+/*
+dims
+2.5 x 3.5
+30 X 42 42/30= 
+*/

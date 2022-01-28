@@ -14,4 +14,13 @@ nav {
             text-decoration: underline;
         }
     }
+    * {
+        background-color: burlywood;
+        // padding: 20px 0;
+    }
+}
+.cardContainer {
+    position: absolute;
+    bottom: 34%;
+    left: 50%;
 }
