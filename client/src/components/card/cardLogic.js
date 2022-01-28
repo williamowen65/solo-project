@@ -1,5 +1,8 @@
 import Card from "./Card";
 import React from "react";
+import sprite from '../../assets/imgs/cardsSprite.png';
+
+// console.log(sprite);
 
 export const frontPageCards = [
                 ['A', 'hearts'], 
@@ -38,22 +41,23 @@ export function assignAngles(myCardCount, opponent, myCardData) {
     const bounds = [-45, 45]
     const difference = (bounds[0] * -1) + bounds[1]
     const factor = difference /myCardCount
-    let start = bounds[0]
+    let end = bounds[0]
     // console.log(myCardCount);
     const myCards = []
 
     for(let i = 0; i < myCardCount; i++){
         const styles = {
-            transform: `rotate(${start}deg) translate(-50%,-50%)`,
+            transform: `rotate(${0}deg) translate(-50%,-50%)`,
+            backgroundImage: `url(${sprite})`
         }
-    
-        start += factor
+        const animateTo = `rotate(${end}deg) translate(-50%,-50%)`
+        end += factor
         if(opponent){
             myCards.push(<Card styles={styles} key={i} classes={'opponent'}/>)
         } else {
             let myData = myCardData[i]
             styles.backgroundPosition = spriteCoordinates[myData[0]][suits[myData[1]]]
-            myCards.push(<Card styles={styles} key={i} classes={'myHand'}/>)
+            myCards.push(<Card styles={styles} key={i} classes={'myHand'} animateTo={animateTo}/>)
         }
     }
 
